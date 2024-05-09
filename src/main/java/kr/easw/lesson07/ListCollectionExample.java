@@ -3,7 +3,6 @@ package kr.easw.lesson07;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 /**
  * 해당 클래스는 List 컬렉션에 대해 조금 더 친숙해지기 위해 구성된 예제입니다.
  *
@@ -18,22 +17,31 @@ public class ListCollectionExample {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
         System.out.println("How many students are there?");
         System.out.print("> ");
-        int next = scanner.nextInt();
-        for (int i = 0; i < next; i++) {
+        int numberOfStudents = Integer.parseInt(scanner.nextLine());
+
+        // 음수 값을 입력했을 때 다시 입력받도록 처리
+        while (numberOfStudents <= 0) {
+            System.out.println("Please enter a valid number of students (greater than zero).");
+            numberOfStudents = Integer.parseInt(scanner.nextLine());
+        }
+
+        for (int i = 0; i < numberOfStudents; i++) {
             System.out.println("Enter the name of the student.");
             System.out.print("> ");
-            String name = scanner.next();
+            String name = scanner.nextLine();
             System.out.println("Enter the age of the student.");
             System.out.print("> ");
-            int age = scanner.nextInt();
+            int age = Integer.parseInt(scanner.nextLine());
             // List는 배열과 다르게 크기에 대해 신경 쓸 필요가 없습니다.
             // 이는 다르게 말해, 내부적으로 늘어난 배열의 크기의 관리가 불가능하다는 말과도 같기 떄문에
             // 과도하게 큰 배열을 사용할 경우, 메모리 낭비가 발생할 수 있습니다.
             students.add(new Student(name, age));
         }
-        System.out.println("There's " + students.size() + " students.");
+
+        System.out.println("There are " + students.size() + " students.");
         for (Student student : students) {
             System.out.println("Name: " + student.getName() + ", Age: " + student.getAge());
         }
